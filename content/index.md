@@ -1,11 +1,13 @@
 ---
-tag:
-    - haha
+title: Welcome to Yifan Huang's Homepage!
+lang: en
+tags:
+    - test
+draft: false
 ---
 
-# Welcome to Quartz
+In construction...
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+Test: add an image
 
-Test!
+![[og-image.png]]
