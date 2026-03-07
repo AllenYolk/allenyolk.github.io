@@ -8,6 +8,8 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
+      ORCID: "https://orcid.org/0009-0000-9915-8227",
+      "Google Scholar": "https://scholar.google.com/citations?user=zJVjOfYAAAAJ",
       GitHub: "https://github.com/AllenYolk",
       Gmail: "mailto:allen.yfhuang@gmail.com",
       "Edu Email": "mailto:yfhuang@pku.edu.cn",
