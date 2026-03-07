@@ -38,7 +38,16 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      title: "All Pages",
+      mapFn: (node) => {
+        if (node.isFolder) {
+          node.displayName = "📁 " + node.displayName
+        } else {
+          node.displayName = "📄 " + node.displayName
+        }
+      },
+    }),
   ],
   right: [
     Component.Graph(),
@@ -62,7 +71,16 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      title: "All Pages",
+      mapFn: (node) => {
+        if (node.isFolder) {
+          node.displayName = "📁 " + node.displayName
+        } else {
+          node.displayName = "📄 " + node.displayName
+        }
+      },
+    }),
   ],
   right: [],
 }

@@ -5,9 +5,9 @@ tags:
 draft: false
 ---
 
-<div style="display:flex; align-items:center;">
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:40px;">
 
-<div style="flex:1; text-align:justify;">
+<div style="flex:1; text-align:justify; min-width:250px;">
 
 ## Short Bio
 
@@ -20,8 +20,8 @@ I'm currently a PhD student at [School of Computer Science, Peking University](h
 
 </div>
 
-<div style="flex:0 0 auto; margin-left:40px;">
-<img src="/assets/portrait.jpeg" width="200" style="border-radius:8px">
+<div style="flex:0 0 auto; text-align:center; min-width:200px;">
+<img src="/assets/portrait.jpeg" width="200" style="border-radius:8px; max-width:100%;">
 </div>
 
 </div>
