@@ -131,17 +131,50 @@ $$
 
 ## 初始化
 
-**Fixup Initialization** [^fixup]：
+**Fixup Initialization** [^fixup] 调整传统初始化策略并添加少量可学习标量，用以缓解 Normalization-free ResNet 训练时的梯度爆炸问题 [^tnnls]。
 
-* 通过修改残差网络的初始化权重，使其在训练初期信号衰减/爆炸得到控制
-* 可在 ResNet 上训练深层网络而不需要 BN
-* 训练稳定性和 SOTA 性能通常稍逊于 NFNets，但方法更简单
+假设网络中共含有 $L$ 个残差块，其中第 $l$ 个残差块含 $m^{(l)}$ 个权重层。Fixup 初始化规则为：
+
+1. 将每个残差块的最后一个权重层初始化为全 0，从而使残差分枝的输出为 $f^{(l)}(\mathbf{x}^{(l)})=0$。即：除了 transition 块以外的其他残差块都被初始化成恒等映射。
+2. 对于残差分枝中的其他权重，先做标准的 Kaiming 初始化，再放缩 $L^{-\frac{1}{2m^{(l)}-2}}$ 倍。这一放缩避免了梯度爆炸。
+3. 在每个残差分枝加和前，施加一个可学习且初始化为 $1$ 的标量放缩：$\mathbf{x}^{(l+1)}=\alpha^{(l)}f^{(l)}(\mathbf{x}^{(l)})+\mathbf{x}^{(l)}$。在每个线性变换和激活函数前，施加一个可学习且初始化为 $0$ 的标量偏置。这些标量模拟了 BN 层的可学习仿射变换，但更省参数。
+
+Fixup 初始化的优势为：只涉及初始化方法的改动和少量额外标量，不涉及训练期间的权重标准化和梯度裁剪。工程实现方便，训练速度更快。但其缺点在于：缺少对训练过程的约束，信号可能随着训练的进行而逐渐爆炸，故性能不如带 BN 的 ResNet 以及 NF-ResNet。
 
 ## 噪声注入
 
-**NoMorelization**[^nomore]：用 **两标量 + 噪声注入** 模拟归一化作用，计算成本极低，速度快，并适用于卷积和 Transformer 等架构。
+**NoMorelization**[^nomore] 一文从单个样本的角度审视 BN，发现 BN 实际上对样本做了 L2 正则化和噪声注入两个步骤。不妨假设 batch 中含有 $N$ 个样本，且每个样本 $x_i$ 都是标量。若忽略仿射变换以及分母上的标准差，则 BN 可表示为
 
-…
+$$
+\begin{aligned}
+\hat{x}_i &= x_i - \frac{1}{N}\sum_{n=1}^N x_n \\
+&= \frac{N-1}{N}x_i + \frac{1}{N}\sum_{n=1,\ n\ne i}^N x_n \ ,
+\end{aligned}
+$$
+
+第一项是对样本 $x_i$ 的固定比例衰减，类似于 L2 正则化对权重的衰减效应；第二项与当前样本无关，故可解释为噪声。实际情况下，batch 中信号样本并不遵从独立同分布的正态分布，难以对这里的噪声进行直接建模。对于这个噪声项，NoMorelization 的作者持有以下观点 [^nomore]：
+
+* 这个噪声起到了正则化的作用。故删去 BN 后，网络性能变差。
+* 然而，这个噪声的形式过于复杂，增加了训练难度。若在保留噪声的前提下，简化噪声形式，则可能提升模型性能。
+
+这一观点可以自然拓展到其他类型的 normalization 上。于是，NoMorelization 直接将噪声项简化为高斯噪声，并得到如下的模块公式：
+
+$$
+\mathbf{\hat{x}} = \alpha\mathbf{x}+\beta+\gamma\cdot\boldsymbol{\delta},
+$$
+
+其中 $\boldsymbol{\delta}$ 是均值为 0 的高斯噪声向量，$\alpha$ 和 $\beta$ 是可学习的标量，$\gamma$ 是不可学习的、用于控制噪声强度的超参数。实际应用中，NoMorelization 模块并非直接替换原有的 Normalization 层，而是添加在残差分枝结尾处（加和之前），即
+
+$$
+\mathbf{x}^{(l+1)} = \left[\alpha^{(l)} f^{(l)}(\mathbf{x}^{(l)})+\beta^{(l)}+\gamma\cdot\boldsymbol{\delta}\right]+\mathbf{x}^{(l)},
+$$
+
+这种情况下，$\alpha$ 和 $\beta$ 都初始化为 0，从而使残差块被初始化为恒等映射。替代 BN 时，通常 $\gamma=0.1$；替代 LN 时，通常 $\gamma=10^{-4}$。噪声仅在训练时施加；推理时，噪声项被移除。
+
+> [!note]
+> 这里只是阐述原文观点和方法。请客观理性地看待！
+
+NoMorelization 形式简洁，易于实现，训练开销低，且可替换 BN、LN 等多种 normalization 层并应用于 CNN、Transformer 等多种架构中。原文实验表明，NoMorelization 可以达到和传统归一化方式相似（甚至略高）的性能；若结合 sWS 和 AGC 等正则化方法，则可达到显著更高的性能。
 
 [^nf1]: Brock, A., De, S., & Smith, S.L. (2021). Characterizing signal propagation to close the performance gap in unnormalized ResNets. ICLR 2021.
 [^nf2]: Brock, A., De, S., Smith, S. L., & Simonyan, K. (2021). High-Performance Large-Scale Image Recognition Without Normalization. ICML 2021.
