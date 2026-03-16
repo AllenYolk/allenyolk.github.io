@@ -113,7 +113,7 @@ $$
 \begin{cases}
 \frac{\lambda}{\|\mathbf{G}\|_2} \mathbf{G} \quad &\text{if }\|\mathbf{G}\|_2>\lambda \\
 \mathbf{G} &\text{else}
-\end{cases}\ ，
+\end{cases}\ ,
 $$
 
 此处的裁剪阈值 $\lambda \in \mathbb{R}^+$ 至关重要，需要花大功夫调优。AGC 则让梯度裁剪阈值取决于权重范数大小：
