@@ -119,11 +119,11 @@ $$
 此处的裁剪阈值 $\lambda \in \mathbb{R}^+$ 至关重要，需要花大功夫调优。AGC 则让梯度裁剪阈值取决于权重范数大小：
 
 $$
-\mathbf{\hat{G}}_i =
+\mathbf{\hat{G}}_i = 
 \begin{cases}
 \frac{\lambda \|\mathbf{W}_i\|^*_2}{\|\mathbf{G}_i\|_2}\mathbf{G}_i \quad &\text{if } \frac{\|\mathbf{G}_i\|_2}{\|\mathbf{W}_i\|^*_2} > \lambda \\
 \mathbf{G}_i &\text{else}
-\end{cases}\ ,\
+\end{cases}\ ,\ 
 \text{where } \|\mathbf{W}_i\|_2^*=\max\left(\|\mathbf{W}_i\|_2, \epsilon\right)
 $$
 
@@ -176,9 +176,48 @@ $$
 
 NoMorelization 形式简洁，易于实现，训练开销低，且可替换 BN、LN 等多种 normalization 层并应用于 CNN、Transformer 等多种架构中。原文实验表明，NoMorelization 可以达到和传统归一化方式相似（甚至略高）的性能；若结合 sWS 和 AGC 等正则化方法，则可达到显著更高的性能。
 
+## 其他
+
+除了上述思路外，还有一些更加直接的 Normalization 替换方法。这些方法用于 Transformer 架构中，用于替换 LN 或 RMSNorm。
+
+### DyT: 用非线性激活模拟归一化
+
+Zhu 等人 [^dyt] 发现，Transformer 中的 LN 层总是给出形如 $\tanh$ 的输入输出映射，如下图所示。
+
+![[norm-free-networks-2.png]]
+
+这些映射的陡峭程度各有不同。于是，Zhu 等人用**Dynamic Tanh (DyT)** 来替代 Transformer 中的 LN：
+
+$$
+\operatorname{DyT}(\mathbf{x})=\boldsymbol{\gamma} \tanh(\alpha\mathbf{x}) + \boldsymbol{\beta}
+$$
+
+其中 $\alpha$ 是逐层的可学习标量，用来控制 $\tanh$ 的陡峭程度；向量 $\boldsymbol{\gamma}$ 和 $\boldsymbol{\beta}$ 是可学习的逐通道仿射变换参数。
+
+![[norm-free-networks-3.png]]
+
+### TaperNorm: 在训练过程中逐渐消除 Normalization
+
+TaperNorm[^tapernorm] 将 LN 或 RMSNorm 与一个放缩算子进行门控。以 RMSNorm 为例：
+
+$$
+\operatorname{TaperNorm}(\mathbf{x}; g)
+=
+g\cdot\operatorname{RMSNorm}(\mathbf{x}) +
+(1-g)\cdot c\tilde{\boldsymbol{\gamma}} \mathbf{x}
+$$
+
+这里的标量 $c$ 是逐层的可学习放缩系数，向量 $\tilde{\boldsymbol{\gamma}}$ 是逐通道的可学习放缩系数，标量 $g$ 则是全局统一的门控系数。
+
+训练开始时，$g=1$，即与常规 normalization 行为一致。warmup 结束后，放缩算子的逐通道系数 $\tilde{\boldsymbol{\gamma}}$ 被初始化为 normalization 的放缩系数 $\tilde{\boldsymbol{\gamma}}\leftarrow \boldsymbol{\gamma}$，随后 $g$ 以 cosine 形式随着训练进行逐渐衰减至 $0$。随着 $g$ 变为 $0$，normalization 不再生效，可从网络中删去。
+
+![[norm-free-networks-4.png]]
+
 [^nf1]: Brock, A., De, S., & Smith, S.L. (2021). Characterizing signal propagation to close the performance gap in unnormalized ResNets. ICLR 2021.
 [^nf2]: Brock, A., De, S., Smith, S. L., & Simonyan, K. (2021). High-Performance Large-Scale Image Recognition Without Normalization. ICML 2021.
 [^ottt]: Xiao, M., Meng, Q., Zhang, Z., He, D., & Lin, Z. (2022). Online Training Through Time for Spiking Neural Networks. NeurIPS 2022.
 [^tnnls]: Civitelli, E., Sortino, A., Lapucci, M., Bagattini, F., & Galvan, G. (2025). A Robust Initialization of Residual Blocks for Effective ResNet Training Without Batch Normalization. IEEE Transactions on Neural Networks and Learning Systems, 36(1), 1947–1952.
 [^fixup]: Zhang, H., Dauphin, Y., & Ma, T. (2019). Fixup Initialization: Residual Learning Without Normalization. ICLR 2019.
 [^nomore]: Liu, C., Yang, Y., Ding, Y., & Lu, H. (2022). NoMorelization: Building Normalizer-Free Models from a Sample's Perspective. arXiv preprint arXiv:2210.06932.
+[^dyt]: Zhu, J., Chen, X., He, K., LeCun, Y., & Liu, Z. (2025). Transformers without normalization. CVPR 2025.
+[^tapernorm]: Kanavalau, A., Alonso, C. A., & Lall, S. (2026). Gated Removal of Normalization in Transformers Enables Stable Training and Efficient Inference. arXiv preprint arXiv:2602.10408.
