@@ -79,4 +79,5 @@ A living document of my tool stack.
 **[Tailscale](https://tailscale.com/)**
 
 * Zero-config VPN for secure, private networking across devices
-* Manipulate my Mac Mini from my Macbook through **Tailscale + [macOS's Screen Sharing](https://support.apple.com/en-sg/guide/mac-help/mh14066/mac)**
+* **Tailscale + [macOS's Screen Sharing](https://support.apple.com/en-sg/guide/mac-help/mh14066/mac)**: manipulate my Mac Mini from my Macbook
+* **Tailscale + LibreChat**: chat with LLMs on my cell phone
