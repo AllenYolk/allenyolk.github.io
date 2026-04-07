@@ -78,6 +78,8 @@ export const defaultListPageLayout: PageLayout = {
       mapFn: (node) => {
         if (node.isFolder) {
           node.displayName = "📁 " + node.displayName
+        } else if (node.displayName === "Tool Stack") {
+          node.displayName = "🔧 " + node.displayName
         } else {
           node.displayName = node.displayName
         }
