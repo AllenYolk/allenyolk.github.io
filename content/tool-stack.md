@@ -32,7 +32,7 @@ A living document of my tool stack.
 
 * Minimal, high-performance code editor
 * Fast startup
-* Comfortable remote development
+* Remote development
 * Seamless collaboration through panel sharing
 * Native AI integration (Copilot, Claude, …) through [ACP](https://agentclientprotocol.com/get-started/introduction)
 
@@ -74,12 +74,8 @@ A living document of my tool stack.
 * Autonomous AI agent with local system access
 * Integrates with Claude and Copilot APIs via a local gateway
 * Capable of file manipulation, terminal execution, and task planning
-
-**[LibreChat](https://github.com/danny-avila/LibreChat)**
-
-* Open-source, self-hosted LLM chat UI & service
-* Supports multiple AI providers (OpenAI, Anthropic, etc.)
-* Also acts as the UI for Hermes Agent
+* Memory enhanced by [Holographic](https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers#holographic)
+* Connect to [Feishu](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/feishu)
 
 ## Network
 
@@ -87,7 +83,9 @@ A living document of my tool stack.
 
 * Zero-config VPN for secure, private networking across devices
 * **Tailscale + [macOS's Screen Sharing](https://support.apple.com/en-sg/guide/mac-help/mh14066/mac)**: manipulate my Mac Mini from my Macbook
-* **Tailscale + LibreChat**: chat with LLMs/agents on my cell phone
+* **Tailscale + SSH** to my Mac Mini from my Macbook (after [enabling remote login](https://osxdaily.com/2022/07/08/turn-on-ssh-mac/))
+	* With Zed Remote: no need to clone the repos to my Macbook
+* **Tailscale + Termius**: SSH to my Mac Mini from my iPhone
 
 > [!summary]
 >
@@ -101,10 +99,8 @@ A living document of my tool stack.
 >         System(macbook, "Macbook", "")
 >
 >         Boundary(mac_mini_box, "Mac Mini", "") {
->             System(librechat, "LibreChat UI", "")
->             System(zed, "Zed Editor", "")
 >             System(hermes_gateway, "Hermes Gateway", "")
->             System(orbstack, "OrbStack", "")
+>             System(zed, "Zed Editor", "")
 >             System(macos, "macOS on Mac Mini", "")
 >         }
 >     }
@@ -116,30 +112,35 @@ A living document of my tool stack.
 >
 > 	Rel(user, iphone, "")
 > 	Rel(user, macbook, "")
->     Rel(iphone, librechat, "")
->     Rel(macbook, librechat, "")
->     Rel(macbook, macos, "")
->     Rel(librechat, orbstack, "")
->     Rel(librechat, claude_api, "")
->     Rel(librechat, hermes_gateway, "")
+>     Rel(macbook, macos, "Screen Sharing or SSH")
+>     Rel(iphone, macos, "Termius + SSH")
+>     Rel(macbook, hermes_gateway, "Feishu")
+>     Rel(iphone, hermes_gateway, "Feishu")
+>     Rel(macbook, zed, "")
 >     Rel(zed, claude_api, "")
 >     Rel(zed, copilot_api, "")
 >     Rel(hermes_gateway, claude_api, "")
 >     Rel(hermes_gateway, copilot_api, "")
->     Rel(hermes_gateway, macos, "")
->
+>     Rel(hermes_gateway, macos, "Manipulate")
+>     
+>     %% User 红色系 %% 
 >     UpdateElementStyle(user, $bgColor="#ff7b7222", $borderColor="#f85149") 
 >     UpdateElementStyle(iphone, $bgColor="#ff7b7211", $borderColor="#f85149") 
 >     UpdateElementStyle(macbook, $bgColor="#ff7b7211", $borderColor="#f85149") 
->     UpdateElementStyle(librechat, $bgColor="#58a6ff22", $borderColor="#1f6feb") 
+>     %% Agent/Infrastructure 绿色系 %% 
 >     UpdateElementStyle(hermes_gateway, $bgColor="#3fb95022", $borderColor="#238636") 
 >     UpdateElementStyle(orbstack, $bgColor="#3fb95011", $borderColor="#238636") 
+>     %% API 金色系 %% 
 >     UpdateElementStyle(claude_api, $bgColor="#d2992222", $borderColor="#9e6a03") 
 >     UpdateElementStyle(copilot_api, $bgColor="#d2992222", $borderColor="#9e6a03") 
+>     %% Host 灰色系 %% 
 >     UpdateElementStyle(macos, $bgColor="#8b949e22", $borderColor="#484f58") 
 >     UpdateElementStyle(zed, $bgColor="#8b949e11", $borderColor="#484f58") 
->
+>     %% --- 连线颜色微调 --- %% 
 >     UpdateRelStyle(macbook, macos, $lineColor="#9e6a03", $textColor="#9e6a03") 
->     UpdateRelStyle(librechat, orbstack, $lineColor="#1f6feb", $textColor="#1f6feb") 
+>     UpdateRelStyle(iphone, macos, $lineColor="#9e6a03", $textColor="#9e6a03")
 >     UpdateRelStyle(hermes_gateway, macos, $lineColor="#238636", $textColor="#238636")
+>     UpdateRelStyle(macbook, hermes_gateway, $lineColor="#238636", $textColor="#238636")
+>     UpdateRelStyle(iphone, hermes_gateway, $lineColor="#238636", $textColor="#238636")
+>     UpdateRelStyle(macbook, zed, $lineColor="#f85149", $textColor="#f85149")
 > ```
