@@ -85,7 +85,7 @@ A living document of my tool stack.
 * **Tailscale + [macOS's Screen Sharing](https://support.apple.com/en-sg/guide/mac-help/mh14066/mac)**: manipulate my Mac Mini from my Macbook
 * **Tailscale + SSH** to my Mac Mini from my Macbook (after [enabling remote login](https://osxdaily.com/2022/07/08/turn-on-ssh-mac/))
 	* With Zed Remote: no need to clone the repos to my Macbook
-* **Tailscale + Termius**: SSH to my Mac Mini from my iPhone
+* **Tailscale + [Termius](https://termius.com/)**: SSH to my Mac Mini from my iPhone
 
 > [!summary]
 >
