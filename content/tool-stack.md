@@ -34,7 +34,7 @@ A living document of my tool stack.
 * Fast startup
 * Remote development
 * Seamless collaboration through panel sharing
-* Native AI integration (Copilot, Claude, …) through [ACP](https://agentclientprotocol.com/get-started/introduction)
+* Native AI integration (Copilot, OpenAI Codex, …) through [ACP](https://agentclientprotocol.com/get-started/introduction)
 
 **[Obsidian](https://obsidian.md/)**
 
@@ -63,16 +63,17 @@ A living document of my tool stack.
 * Integrates directly into Zed, VS Code and terminals
 * For simple/short-term coding tasks
 
-**[Claude Code](https://claude.ai/)**
+**[Codex](https://openai.com/codex/)**
 
-* Advanced AI agent for code understanding and generation
-* Integrates with Zed, VS Code and terminals
+* Advanced AI agent for code understanding and generation via CLI
+* Also features a Desktop GUI app for visual codebase exploration and chat
 * For complex refactoring, code review, and documentation
+* Integrates with Zed, VS Code and terminals
 
 **[Hermes Agent](https://hermes-agent.nousresearch.com/)**
 
 * Autonomous AI agent with local system access
-* Integrates with Claude and Copilot APIs via a local gateway
+* Integrates with OpenAI and Copilot APIs via a local gateway
 * Capable of file manipulation, terminal execution, and task planning
 * Memory enhanced by [Holographic](https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers#holographic)
 * Connect to [Feishu](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/feishu)
@@ -104,36 +105,33 @@ A living document of my tool stack.
 >             System(macos, "macOS on Mac Mini", "")
 >         }
 >     }
->
 >     Boundary(providers, "LLM Providers", "") {
->         System_Ext(claude_api, "Claude API", "")
->         System_Ext(copilot_api, "GitHub Copilot API", "")
->     }
->
-> 	Rel(user, iphone, "")
-> 	Rel(user, macbook, "")
->     Rel(macbook, macos, "Screen Sharing or SSH")
->     Rel(iphone, macos, "Termius + SSH")
->     Rel(macbook, hermes_gateway, "Feishu")
->     Rel(iphone, hermes_gateway, "Feishu")
->     Rel(macbook, zed, "")
->     Rel(zed, claude_api, "")
->     Rel(zed, copilot_api, "")
->     Rel(hermes_gateway, claude_api, "")
->     Rel(hermes_gateway, copilot_api, "")
->     Rel(hermes_gateway, macos, "Manipulate")
->     
->     %% User 红色系 %% 
->     UpdateElementStyle(user, $bgColor="#ff7b7222", $borderColor="#f85149") 
->     UpdateElementStyle(iphone, $bgColor="#ff7b7211", $borderColor="#f85149") 
->     UpdateElementStyle(macbook, $bgColor="#ff7b7211", $borderColor="#f85149") 
->     %% Agent/Infrastructure 绿色系 %% 
->     UpdateElementStyle(hermes_gateway, $bgColor="#3fb95022", $borderColor="#238636") 
->     UpdateElementStyle(orbstack, $bgColor="#3fb95011", $borderColor="#238636") 
->     %% API 金色系 %% 
->     UpdateElementStyle(claude_api, $bgColor="#d2992222", $borderColor="#9e6a03") 
->     UpdateElementStyle(copilot_api, $bgColor="#d2992222", $borderColor="#9e6a03") 
->     %% Host 灰色系 %% 
+> 	    System_Ext(openai_api, "OpenAI API", "")
+> 	    System_Ext(copilot_api, "GitHub Copilot API", "")
+> 	 }
+> 	 Rel(user, iphone, "")
+> 	 Rel(user, macbook, "")
+> 	 Rel(macbook, macos, "Screen Sharing or SSH")
+> 	 Rel(iphone, macos, "Termius + SSH")
+> 	 Rel(macbook, hermes_gateway, "Feishu")
+> 	 Rel(iphone, hermes_gateway, "Feishu")
+> 	 Rel(macbook, zed, "")
+> 	 Rel(zed, openai_api, "")
+> 	 Rel(zed, copilot_api, "")
+> 	 Rel(hermes_gateway, openai_api, "")
+> 	 Rel(hermes_gateway, copilot_api, "")
+> 	 Rel(hermes_gateway, macos, "Manipulate")
+> 	 %% User 红色系 %% 
+> 	 UpdateElementStyle(user, $bgColor="#ff7b7222", $borderColor="#f85149") 
+>      UpdateElementStyle(iphone, $bgColor="#ff7b7211", $borderColor="#f85149") 
+>      UpdateElementStyle(macbook, $bgColor="#ff7b7211", $borderColor="#f85149") 
+>      %% Agent/Infrastructure 绿色系 %% 
+>      UpdateElementStyle(hermes_gateway, $bgColor="#3fb95022", $borderColor="#238636") 
+>      UpdateElementStyle(orbstack, $bgColor="#3fb95011", $borderColor="#238636") 
+>      %% API 金色系 %% 
+>      UpdateElementStyle(openai_api, $bgColor="#d2992222", $borderColor="#9e6a03") 
+>      UpdateElementStyle(copilot_api, $bgColor="#d2992222", $borderColor="#9e6a03") 
+>      %% Host 灰色系 %% 
 >     UpdateElementStyle(macos, $bgColor="#8b949e22", $borderColor="#484f58") 
 >     UpdateElementStyle(zed, $bgColor="#8b949e11", $borderColor="#484f58") 
 >     %% --- 连线颜色微调 --- %% 
