@@ -30,7 +30,7 @@ I'm currently a PhD student at [School of Computer Science, Peking University](h
 
 ### First-author Papers
 
-* **Yifan Huang**, Wei Fang, Zecheng Hao, Zhengyu Ma, Yonghong Tian, [Towards Lossless Memory-efficient Training of Spiking Neural Networks via Gradient Checkpointing and Spike Compression](https://openreview.net/forum?id=nrBJ0Uvj7c), **ICLR 2026 (in press)** #snn #ai-infra
+* **Yifan Huang**, Wei Fang, Zecheng Hao, Zhengyu Ma, Yonghong Tian, [Towards Lossless Memory-efficient Training of Spiking Neural Networks via Gradient Checkpointing and Spike Compression](https://openreview.net/forum?id=nrBJ0Uvj7c), **ICLR 2026** #snn #ai-infra
 
 ### Preprints
 
