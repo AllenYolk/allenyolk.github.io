@@ -40,6 +40,8 @@ I'm currently a PhD student at [School of Computer Science, Peking University](h
 
 * Kaiwei Che, Wei Fang, Peng Xue, **Yifan Huang**, Zhengyu Ma, Yonghong Tian, [Parallel Training Time-to-First-Spike Spiking Neural Networks](https://ojs.aaai.org/index.php/AAAI/article/view/37149), **AAAI 2026** #snn
 * Zecheng Hao, **Yifan Huang**, Zijie Xu, Wenxuan Liu, Yuanhong Tang, Zhaofei Yu, Tiejun Huang, Rethinking SNN Online Training and Deployment: Gradient-Coherent Learning via Hybrid-Driven LIF Model, **CVPR 2026 (in press)** #snn
+* Kaiwei Che, Wei Fang, Zhengyu Ma, **Yifan Huang**, Peng Xue, Li Yuan, Yonghong Tian, [Efficiently Training Time-to-First-Spike Spiking Neural Networks from Scratch](https://openreview.net/forum?id=3EcT46wsdc), **ICML 2026 (spotlight, in press)** #snn
+* Dongyang Ma, Zhengyu Ma, **Yifan Huang**, Chenlin Zhou, Wei Zhang, Yonghong Tian, [Bio-Vision-Inspired Spiking Neural Networks for Object Detection with Event Cameras](https://openreview.net/forum?id=MoQiswth2n), **ICML 2026 (in press)** #snn
 
 ## Projects
 
