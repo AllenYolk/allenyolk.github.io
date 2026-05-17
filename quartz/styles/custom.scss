@@ -6,40 +6,6 @@
 // =============================================================================
 
 // ---------------------------------------------------------------------------
-// CODE BLOCKS — ivory background, warm border (Kami code-block style)
-// ---------------------------------------------------------------------------
-pre {
-  background: #faf9f5;        // ivory
-  border: 1px solid #e5e3d8;  // warm border (matches parchment undertone)
-
-  & > code {
-    // Line number color: light matcha gray (Kami stone at reduced opacity)
-    & > [data-line]::before {
-      color: #999692;  // warm mid-light gray — quieter than default rgba(115,138,148,0.6)
-    }
-  }
-}
-
-// Code block title
-figure[data-rehype-pretty-code-figure] {
-  & > [data-rehype-pretty-code-title] {
-    border-color: #e5e3d8;
-    color: #6b6a64;  // Kami stone
-    background: #faf9f5;
-  }
-}
-
-// ---------------------------------------------------------------------------
-// INLINE CODE — warm brand-tint background (Kami #EEF2F7)
-// ---------------------------------------------------------------------------
-code {
-  background: #eef2f7;  // ink-blue 0.08 solid equivalent
-  color: #1b365d;       // Kami brand — makes inline code pop subtly
-  padding: 0.1rem 0.25rem;
-  border-radius: 3px;
-}
-
-// ---------------------------------------------------------------------------
 // BLOCKQUOTE — refined: thinner border, muted text (Kami callout style)
 // ---------------------------------------------------------------------------
 blockquote {
