@@ -1,3 +1,12 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+// Looser line-height and paragraph spacing
+p, li {
+  line-height: 1.9rem;
+}
+
+p {
+  margin-bottom: 1.2rem;
+}
