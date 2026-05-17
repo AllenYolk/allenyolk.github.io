@@ -1,51 +1,9 @@
 @use "./base.scss";
 
-// =============================================================================
-// Kami-inspired refinements on Quartz default theme
-// Cherry-picked elements from Kami's design system for tech blog use
-// =============================================================================
+// put your custom CSS here!
 
-// ---------------------------------------------------------------------------
-// BLOCKQUOTE — refined: thinner border, muted text (Kami callout style)
-// ---------------------------------------------------------------------------
-blockquote {
-  border-left: 2px solid var(--tertiary);
-  padding-left: 0.85rem;
-  color: #6b6a64;  // Kami stone — secondary text
-
-  p {
-    color: #6b6a64;
-  }
-}
-
-// ---------------------------------------------------------------------------
-// TABLE — brand-colored header bottom border (Kami table style)
-// ---------------------------------------------------------------------------
-th {
-  border-bottom: 2px solid var(--secondary);
-  font-weight: 600;
-}
-
-// ---------------------------------------------------------------------------
-// SELECTION — warm brand tint (Kami ::selection)
-// ---------------------------------------------------------------------------
-::selection {
-  background: color-mix(in srgb, var(--secondary) 35%, transparent);
-  color: var(--dark);
-}
-
-// ---------------------------------------------------------------------------
-// INTERNAL LINKS — cleaner, no highlight background (Kami approach)
-// ---------------------------------------------------------------------------
-a.internal {
-  background-color: transparent;
-  padding: 0;
-  border-radius: 0;
-}
-
-// ---------------------------------------------------------------------------
-// IMAGE — slightly tighter radius (Kami uses 4px vs Quartz 5px)
-// ---------------------------------------------------------------------------
-img {
-  border-radius: 4px;
+// Text rendering — antialiased for cleaner text on Retina displays
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
