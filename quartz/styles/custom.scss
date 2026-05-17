@@ -1,3 +1,85 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// =============================================================================
+// Kami-inspired refinements on Quartz default theme
+// Cherry-picked elements from Kami's design system for tech blog use
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// CODE BLOCKS — ivory background, warm border (Kami code-block style)
+// ---------------------------------------------------------------------------
+pre {
+  background: #faf9f5;        // ivory
+  border: 1px solid #e5e3d8;  // warm border (matches parchment undertone)
+
+  & > code {
+    // Line number color: light matcha gray (Kami stone at reduced opacity)
+    & > [data-line]::before {
+      color: #999692;  // warm mid-light gray — quieter than default rgba(115,138,148,0.6)
+    }
+  }
+}
+
+// Code block title
+figure[data-rehype-pretty-code-figure] {
+  & > [data-rehype-pretty-code-title] {
+    border-color: #e5e3d8;
+    color: #6b6a64;  // Kami stone
+    background: #faf9f5;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// INLINE CODE — warm brand-tint background (Kami #EEF2F7)
+// ---------------------------------------------------------------------------
+code {
+  background: #eef2f7;  // ink-blue 0.08 solid equivalent
+  color: #1b365d;       // Kami brand — makes inline code pop subtly
+  padding: 0.1rem 0.25rem;
+  border-radius: 3px;
+}
+
+// ---------------------------------------------------------------------------
+// BLOCKQUOTE — refined: thinner border, muted text (Kami callout style)
+// ---------------------------------------------------------------------------
+blockquote {
+  border-left: 2px solid var(--tertiary);
+  padding-left: 0.85rem;
+  color: #6b6a64;  // Kami stone — secondary text
+
+  p {
+    color: #6b6a64;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// TABLE — brand-colored header bottom border (Kami table style)
+// ---------------------------------------------------------------------------
+th {
+  border-bottom: 2px solid var(--secondary);
+  font-weight: 600;
+}
+
+// ---------------------------------------------------------------------------
+// SELECTION — warm brand tint (Kami ::selection)
+// ---------------------------------------------------------------------------
+::selection {
+  background: color-mix(in srgb, var(--secondary) 35%, transparent);
+  color: var(--dark);
+}
+
+// ---------------------------------------------------------------------------
+// INTERNAL LINKS — cleaner, no highlight background (Kami approach)
+// ---------------------------------------------------------------------------
+a.internal {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+// ---------------------------------------------------------------------------
+// IMAGE — slightly tighter radius (Kami uses 4px vs Quartz 5px)
+// ---------------------------------------------------------------------------
+img {
+  border-radius: 4px;
+}
