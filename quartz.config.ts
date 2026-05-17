@@ -24,7 +24,10 @@ const config: QuartzConfig = {
       cdnCaching: true,
       typography: {
         header: "Schibsted Grotesk",
-        body: "Source Sans Pro",
+        body: {
+          name: "Source Sans Pro",
+          weights: [400, 500, 600],
+        },
         code: "JetBrains Mono",
       },
       colors: {
