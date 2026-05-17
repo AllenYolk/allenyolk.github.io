@@ -2,17 +2,6 @@
 
 // put your custom CSS here!
 
-// Charter serif body font with proper fallback chain
-// Charter is a macOS/iOS system font, falls back to Georgia on other platforms
-:root {
-  --bodyFont: "Charter", "Georgia", "Palatino", "Times New Roman", serif;
-}
-
-// English heading optical tightening
-h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.01em;
-}
-
 // Looser line-height and paragraph spacing
 p, li {
   line-height: 1.9rem;
