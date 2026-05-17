@@ -6,3 +6,8 @@
 body {
   text-rendering: optimizeLegibility;
 }
+
+// Header font: Charter (macOS system) → Literata (Google Fonts) → serif
+:root {
+  --headerFont: "Charter", "Literata", "Georgia", "Palatino", serif;
+}
