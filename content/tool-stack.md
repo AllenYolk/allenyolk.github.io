@@ -77,6 +77,7 @@ A living document of my tool stack.
 * Capable of file manipulation, terminal execution, and task planning
 * Memory enhanced by [Holographic](https://hermes-agent.nousresearch.com/docs/user-guide/features/memory-providers#holographic)
 * Connect to [Feishu](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/feishu)
+* Chat with Hermes from anywhere on [Web UI](https://github.com/nesquena/hermes-webui)
 
 ## Network
 
@@ -100,26 +101,32 @@ A living document of my tool stack.
 >         System(macbook, "Macbook", "")
 >
 >         Boundary(mac_mini_box, "Mac Mini", "") {
+> 	        System(zed, "Zed Editor", "")
 >             System(hermes_gateway, "Hermes Gateway", "")
->             System(zed, "Zed Editor", "")
 >             System(macos, "macOS on Mac Mini", "")
 >         }
 >     }
 >     Boundary(providers, "LLM Providers", "") {
 > 	    System_Ext(openai_api, "OpenAI API", "")
 > 	    System_Ext(copilot_api, "GitHub Copilot API", "")
+> 	    System_Ext(minimax_api, "MiniMax API", "")
+> 	    System_Ext(open_router, "Open Router", "")
+> 	    System_Ext(opencode_go, "OpenCode Go", "")
 > 	 }
 > 	 Rel(user, iphone, "")
 > 	 Rel(user, macbook, "")
-> 	 Rel(macbook, macos, "Screen Sharing or SSH")
+> 	 Rel(macbook, macos, "Screen Sharing / SSH")
 > 	 Rel(iphone, macos, "Termius + SSH")
-> 	 Rel(macbook, hermes_gateway, "Feishu")
-> 	 Rel(iphone, hermes_gateway, "Feishu")
+> 	 Rel(macbook, hermes_gateway, "Feishu / Web UI")
+> 	 Rel(iphone, hermes_gateway, "Feishu / Web UI")
 > 	 Rel(macbook, zed, "")
 > 	 Rel(zed, openai_api, "")
 > 	 Rel(zed, copilot_api, "")
 > 	 Rel(hermes_gateway, openai_api, "")
+> 	 Rel(hermes_gateway, minimax_api, "")
 > 	 Rel(hermes_gateway, copilot_api, "")
+> 	 Rel(hermes_gateway, open_router, "")
+> 	 Rel(hermes_gateway, opencode_go, "")
 > 	 Rel(hermes_gateway, macos, "Manipulate")
 > 	 %% User 红色系 %% 
 > 	 UpdateElementStyle(user, $bgColor="#ff7b7222", $borderColor="#f85149") 
@@ -130,7 +137,10 @@ A living document of my tool stack.
 >      UpdateElementStyle(orbstack, $bgColor="#3fb95011", $borderColor="#238636") 
 >      %% API 金色系 %% 
 >      UpdateElementStyle(openai_api, $bgColor="#d2992222", $borderColor="#9e6a03") 
+>      UpdateElementStyle(minimax_api, $bgColor="#d2992222", $borderColor="#9e6a03")
 >      UpdateElementStyle(copilot_api, $bgColor="#d2992222", $borderColor="#9e6a03") 
+>      UpdateElementStyle(open_router, $bgColor="#d2992222", $borderColor="#9e6a03")
+>      UpdateElementStyle(opencode_go, $bgColor="#d2992222", $borderColor="#9e6a03")
 >      %% Host 灰色系 %% 
 >     UpdateElementStyle(macos, $bgColor="#8b949e22", $borderColor="#484f58") 
 >     UpdateElementStyle(zed, $bgColor="#8b949e11", $borderColor="#484f58") 
