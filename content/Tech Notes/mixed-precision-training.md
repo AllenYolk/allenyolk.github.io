@@ -39,55 +39,39 @@ $$
 换言之，只有 master weight 以及 master weight 的更新量采用 `float32` 表示；其余的临时权重、激活值等张量全部采用 `float16` 表示。
 
 ```mermaid
----
-title: Mixed Precision Training
-displayMode: compact
----
-flowchart LR
-	mw{{"Master-W 
-	*float32*"}}
-	w{{"W 
-	*float16*"}}
-	x{{"x 
-	*float16*"}}
-	y{{"y 
-	*float16*"}}
-	l{{"L 
-	*float16*"}}
-	al{{"Scaled L 
-	*float16*"}}
-	gx{{"Grad x 
-	*float16*"}}
-	gy{{"Grad y 
-	*float16*"}}
-	gw{{"Grad W 
-	*float16*"}}
-	gw2{{"Unscaled
-	Grad W 
-	*float32*"}}
-	mw'{{"Updated
-	Master-W 
-	_float32_"}}
-	
-	wu["Weight
-	Update"]
-	fwd["forward"]
-	bwd["backward"]
-	
-	mw --> w
-	mw --> wu
-	wu --> mw'
-	x --> fwd
-	w --> fwd
-	fwd --> y
-	y -. forward .-> l
-	l -- "scale up" --> al
-	al -. backward .-> gy
-	gy --> bwd
-	x --> bwd
-	w --> bwd
-	bwd --> gx
-	bwd --> gw
-	gw --typecast, unscale--> gw2
-	gw2 --> wu
+flowchart TD
+    master["Master Weight<br/><b>FP32</b>"]
+    w["Weight copy<br/><b>FP16</b>"]
+    x["Input x<br/><b>FP16</b>"]
+    y["Output y<br/><b>FP16</b>"]
+    loss["Loss L<br/><b>FP16</b>"]
+    scaled["Scaled L = α·L<br/><b>FP16</b>"]
+    gw["Grad W<br/><b>FP16</b>"]
+    gw32["Grad W / α<br/><b>FP32</b>"]
+    update["Weight Update<br/><b>FP32</b>"]
+    master2["Master Weight<br/><b>FP32</b>"]
+
+    master -->|"copy"| w
+    w -->|"forward"| y
+    x -->|"forward"| y
+    y --> loss
+    loss -->|"×α scale up"| scaled
+    scaled -->|"backward"| gw
+    x -.->|"backward"| gw
+    w -.->|"backward"| gw
+    gw -->|"÷α unscale"| gw32
+    gw32 --> update
+    master --> update
+    update --> master2
+
+    style master fill:#dbeafe,stroke:#3b82f6
+    style master2 fill:#dbeafe,stroke:#3b82f6
+    style update fill:#dbeafe,stroke:#3b82f6
+    style gw32 fill:#dbeafe,stroke:#3b82f6
+    style w fill:#fed7aa,stroke:#ea580c
+    style x fill:#fed7aa,stroke:#ea580c
+    style y fill:#fed7aa,stroke:#ea580c
+    style loss fill:#fed7aa,stroke:#ea580c
+    style scaled fill:#fed7aa,stroke:#ea580c
+    style gw fill:#fed7aa,stroke:#ea580c
 ```
