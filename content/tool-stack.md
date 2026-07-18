@@ -28,13 +28,13 @@ A living document of my tool stack.
 
 ## Editing
 
-**[Zed](https://zed.dev/)**
+**[Neovim](https://neovim.io/)**
 
-* Minimal, high-performance code editor
-* Fast startup
-* Remote development
-* Seamless collaboration through panel sharing
-* Native AI integration (Copilot, OpenAI Codex, …) through [ACP](https://agentclientprotocol.com/get-started/introduction)
+* Terminal-first editor with a portable Lua configuration managed in my dotfiles repository
+* Python and Markdown workflow: basedpyright, Ruff, marksman, Tree-sitter, fzf-lua, Oil, gitsigns, and render-markdown
+* Remote development through SSH and tmux, with OSC52 clipboard support
+* blink.cmp for LSP/path/buffer completion, plus Minuet ghost-text AI completion through OpenCode Go (DeepSeek V4 Flash)
+* WakaTime tracks editing activity through the shared local configuration
 
 **[Obsidian](https://obsidian.md/)**
 
@@ -73,7 +73,6 @@ A living document of my tool stack.
 * Advanced AI agent for code understanding and generation via CLI
 * Also features a Desktop GUI app for visual codebase exploration and chat
 * For complex refactoring, code review, and documentation
-* Integrates with Zed, VS Code and terminals
 * **Remote control from phone:** drive the Codex session on my Mac mini through the [ChatGPT](https://chatgpt.com/) mobile app — no [Tailscale](https://tailscale.com/) required (the link rides on OpenAI's backend, not my LAN)
 
 **[Hermes Agent](https://hermes-agent.nousresearch.com/)**
@@ -93,7 +92,7 @@ A living document of my tool stack.
 * Zero-config VPN for secure, private networking across devices
 * **Tailscale + [macOS's Screen Sharing](https://support.apple.com/en-sg/guide/mac-help/mh14066/mac)**: manipulate my Mac Mini from my Macbook
 * **Tailscale + SSH** to my Mac Mini from my Macbook (after [enabling remote login](https://osxdaily.com/2022/07/08/turn-on-ssh-mac/))
-	* With Zed Remote: no need to clone the repos to my Macbook
+* With SSH + Neovim: repositories can remain on the Mac Mini while editing from the Macbook
 * **Tailscale + [Termius](https://termius.com/)**: SSH to my Mac Mini from my iPhone
 
 ## Summary
@@ -108,7 +107,7 @@ C4Context
         System(macbook, "Macbook", "")
 
          Boundary(mac_mini_box, "Mac Mini", "") {
- 	        System(zed, "Zed Editor", "")
+ 	        System(nvim, "Neovim", "")
              System(hermes_gateway, "Hermes Gateway", "")
              System(codex, "Codex", "")
              System(macos, "macOS on Mac Mini", "")
@@ -120,7 +119,6 @@ C4Context
 	    System_Ext(minimax_api, "MiniMax API", "")
 	    System_Ext(open_router, "Open Router", "")
 	    System_Ext(opencode_go, "OpenCode Go", "")
-	    System_Ext(chatgpt_app, "ChatGPT Mobile App", "")
 	 }
 	
 	 Rel(user, iphone, "")
@@ -129,23 +127,20 @@ C4Context
 	 Rel(iphone, macos, "Termius + SSH")
 	 Rel(macbook, hermes_gateway, "Feishu")
 	 Rel(iphone, hermes_gateway, "Feishu")
-	 Rel(macbook, zed, "")
-	 Rel(zed, openai_api, "")
-	 Rel(zed, copilot_api, "")
+	 Rel(macbook, nvim, "SSH via Ghostty")
+	 Rel(nvim, opencode_go, "Minuet AI completion")
 	 Rel(hermes_gateway, openai_api, "")
 	 Rel(hermes_gateway, minimax_api, "")
 	 Rel(hermes_gateway, copilot_api, "")
 	 Rel(hermes_gateway, open_router, "")
 Rel(hermes_gateway, opencode_go, "")
 Rel(hermes_gateway, macos, "Manipulate")
-Rel(iphone, chatgpt_app, "ChatGPT mobile")
-Rel(chatgpt_app, codex, "remote session")
+Rel(iphone, codex, "ChatGPT Mobile App")
 Rel(codex, openai_api, "via OpenAI backend")
 %% User 红色系 %% 
 	 UpdateElementStyle(user, $bgColor="#ff7b7222", $borderColor="#f85149") 
      UpdateElementStyle(iphone, $bgColor="#ff7b7211", $borderColor="#f85149") 
-     UpdateElementStyle(macbook, $bgColor="#ff7b7211", $borderColor="#f85149") 
-     UpdateElementStyle(chatgpt_app, $bgColor="#ff7b7211", $borderColor="#f85149") 
+     UpdateElementStyle(macbook, $bgColor="#ff7b7211", $borderColor="#f85149")
      %% Agent/Infrastructure 绿色系 %% 
      UpdateElementStyle(hermes_gateway, $bgColor="#3fb95022", $borderColor="#238636") 
      UpdateElementStyle(orbstack, $bgColor="#3fb95011", $borderColor="#238636") 
@@ -157,7 +152,7 @@ Rel(codex, openai_api, "via OpenAI backend")
      UpdateElementStyle(opencode_go, $bgColor="#d2992222", $borderColor="#9e6a03")
      %% Host 灰色系 %% 
     UpdateElementStyle(macos, $bgColor="#8b949e22", $borderColor="#484f58") 
-    UpdateElementStyle(zed, $bgColor="#8b949e11", $borderColor="#484f58") 
+    UpdateElementStyle(nvim, $bgColor="#8b949e11", $borderColor="#484f58") 
      UpdateElementStyle(codex, $bgColor="#8b949e11", $borderColor="#484f58") 
     %% --- 连线颜色微调 --- %% 
     UpdateRelStyle(macbook, macos, $lineColor="#9e6a03", $textColor="#9e6a03") 
@@ -165,5 +160,6 @@ Rel(codex, openai_api, "via OpenAI backend")
     UpdateRelStyle(hermes_gateway, macos, $lineColor="#238636", $textColor="#238636")
     UpdateRelStyle(macbook, hermes_gateway, $lineColor="#238636", $textColor="#238636")
     UpdateRelStyle(iphone, hermes_gateway, $lineColor="#238636", $textColor="#238636")
-    UpdateRelStyle(macbook, zed, $lineColor="#f85149", $textColor="#f85149")
+    UpdateRelStyle(macbook, nvim, $lineColor="#f85149", $textColor="#f85149")
 ```
+
