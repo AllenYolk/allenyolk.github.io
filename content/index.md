@@ -34,14 +34,14 @@ I'm currently a PhD student at [School of Computer Science, Peking University](h
 
 ### Preprints
 
-* **Yifan Huang**, Wei Fang, Zhengyu Ma, Guoqi Li, Yonghong Tian, [Scalable Dendritic Modeling Advances Expressive and Robust Deep Spiking Neural Networks](https://arxiv.org/abs/2412.06355), **arXiv 2025** #snn
+* **Yifan Huang**, Wei Fang, Zhengyu Ma, Guoqi Li, Yonghong Tian, [Scalable Dendritic Modeling Advances Expressive and Robust Deep Spiking Neural Networks](https://arxiv.org/abs/2412.06355), **arXiv 2024** #snn
 
 ### Others
 
+* Kaiwei Che, Zhengyu Ma, **Yifan Huang**, Peng Xue, Li Yuan, Wei Fang, Yonghong Tian, [Efficiently Training Time-to-First-Spike Spiking Neural Networks from Scratch](https://openreview.net/forum?id=3EcT46wsdc), **ICML 2026 (spotlight)** #snn
+* Dongyang Ma, Zhengyu Ma, **Yifan Huang**, Chenlin Zhou, Wei Zhang, Yonghong Tian, [Bio-Vision-Inspired Spiking Neural Networks for Object Detection with Event Cameras](https://openreview.net/forum?id=MoQiswth2n), **ICML 2026** #snn
+* Zecheng Hao, **Yifan Huang**, Zijie Xu, Wenxuan Liu, Yuanhong Tang, Zhaofei Yu, Tiejun Huang, [Rethinking SNN Online Training and Deployment: Gradient-Coherent Learning via Hybrid-Driven LIF Model](https://openaccess.thecvf.com/content/CVPR2026/html/Hao_Rethinking_SNN_Online_Training_and_Deployment_Gradient-Coherent_Learning_via_Hybrid-Driven_CVPR_2026_paper.html), **CVPR 2026** #snn
 * Kaiwei Che, Wei Fang, Peng Xue, **Yifan Huang**, Zhengyu Ma, Yonghong Tian, [Parallel Training Time-to-First-Spike Spiking Neural Networks](https://ojs.aaai.org/index.php/AAAI/article/view/37149), **AAAI 2026** #snn
-* Zecheng Hao, **Yifan Huang**, Zijie Xu, Wenxuan Liu, Yuanhong Tang, Zhaofei Yu, Tiejun Huang, Rethinking SNN Online Training and Deployment: Gradient-Coherent Learning via Hybrid-Driven LIF Model, **CVPR 2026 (in press)** #snn
-* Kaiwei Che, Wei Fang, Zhengyu Ma, **Yifan Huang**, Peng Xue, Li Yuan, Yonghong Tian, [Efficiently Training Time-to-First-Spike Spiking Neural Networks from Scratch](https://openreview.net/forum?id=3EcT46wsdc), **ICML 2026 (spotlight, in press)** #snn
-* Dongyang Ma, Zhengyu Ma, **Yifan Huang**, Chenlin Zhou, Wei Zhang, Yonghong Tian, [Bio-Vision-Inspired Spiking Neural Networks for Object Detection with Event Cameras](https://openreview.net/forum?id=MoQiswth2n), **ICML 2026 (in press)** #snn
 
 ## Projects
 
