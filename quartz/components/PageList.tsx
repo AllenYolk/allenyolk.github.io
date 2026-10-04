@@ -78,7 +78,11 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
               </p>
               <div class="desc">
                 <h3>
-                  <a href={resolveRelative(fileData.slug!, page.slug!)} class="internal">
+                  <a
+                    href={resolveRelative(fileData.slug!, page.slug!)}
+                    class="internal"
+                    title={title}
+                  >
                     {title}
                   </a>
                 </h3>
