@@ -86,13 +86,10 @@ A living document of my tool stack.
 - [pi-minimal-display](https://github.com/AllenYolk/pi-minimal-display): compact tool output
 - [pi-delete](https://github.com/AllenYolk/pi-delete): delete a session on exit
 
-**Models**
+**Providers**
 
-- ChatGPT (OpenAI) and MiniMax M-plan
-
-**Workflow**
-
-- One main agent per manually assigned worktree and development task
+- ChatGPT (OpenAI)
+- MiniMax M-plan
 
 ## Network
 
