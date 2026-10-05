@@ -9,7 +9,7 @@ body {
 }
 
 // Header font: Charter (macOS system) → Literata (Google Fonts) → serif
-:root {
+html:root {
   --headerFont: "Charter", "Literata", "Georgia", "Palatino", serif;
 }
 
@@ -64,5 +64,261 @@ body {
       white-space: normal;
       overflow-wrap: anywhere;
     }
+  }
+}
+
+html .page {
+  max-width: 1400px;
+}
+html .center {
+  min-width: 0 !important;
+}
+html article {
+  font-size: 15.5px;
+  line-height: 1.72;
+}
+html article p {
+  line-height: 1.78;
+}
+html article ul {
+  padding-left: 1.4rem;
+}
+html article li {
+  margin: 0 0 0.7rem;
+  padding-left: 0.16rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+html article li::marker {
+  font-size: 0.8em;
+  color: var(--gray);
+}
+body[data-slug="index"] .center > article > div:first-child {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 148px;
+  gap: 28px !important;
+  align-items: start !important;
+}
+body[data-slug="index"] .center > article > div:first-child > div {
+  min-width: 0 !important;
+  text-align: left !important;
+}
+body[data-slug="index"] .center > article > div:first-child img {
+  width: 148px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 2.1rem;
+}
+body[data-slug="index"] .center > article > div:first-child ul {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.65;
+}
+html .article-title {
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+html .content-meta {
+  font-size: 12px;
+  letter-spacing: 0.01em;
+  margin-top: 0.6rem;
+}
+html article h2 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  margin: 2.1rem 0 1rem;
+}
+html article h3 {
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 1.35rem 0 0.65rem;
+}
+html article h2#short-bio {
+  margin-top: 1.3rem;
+}
+html article a {
+  font-weight: 550;
+}
+html a:focus-visible,
+html button:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
+}
+html article a.external:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html .graph-outer {
+  border-color: var(--lightgray);
+}
+html .sidebar .page-title {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+html .sidebar .toc h3,
+html .sidebar .graph h3,
+html .sidebar .explorer h2 {
+  font-size: 17px;
+  font-weight: 600;
+}
+html .sidebar .explorer-content,
+html .sidebar .toc-content {
+  font-size: 13px;
+  line-height: 1.65;
+}
+html .sidebar .toc-content li {
+  margin-bottom: 0.3rem;
+}
+html footer {
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+@media (min-width: 1201px) {
+  html .page > #quartz-body {
+    grid-template-columns: 225px minmax(0, 1fr) 230px;
+    column-gap: 35px;
+    padding: 0 24px;
+  }
+  html .page > #quartz-body > .sidebar {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  html .page > #quartz-body > .sidebar.right {
+    padding-left: 18px;
+  }
+}
+html {
+  --section-title-background: rgba(27, 54, 93, 0.035);
+}
+html[saved-theme="dark"] {
+  --section-title-background: rgba(135, 161, 187, 0.07);
+}
+html article h2 {
+  position: relative;
+  isolation: isolate;
+  border: 0;
+}
+html article h2::before {
+  content: "";
+  position: absolute;
+  inset: var(--section-title-top, 0px) -10px 0;
+  background: var(--section-title-background);
+  pointer-events: none;
+  border-radius: 3px;
+  z-index: -1;
+}
+/* Keep the previous separator's space so all following text stays in place. */
+html article > h2 {
+  --section-title-top: calc(1.2rem + 1px);
+  padding-top: calc(1.2rem + 1px);
+}
+body[data-slug="index"] .center > article > div:first-child img {
+  border-radius: 3px !important;
+}
+html article strong {
+  font-weight: 650;
+}
+html .page-header {
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--lightgray);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html article a.external {
+    transition:
+      background-color 0.1s,
+      color 0.1s;
+  }
+  html button {
+    transition: background-color 0.1s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html *,
+  html *::before,
+  html *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (max-width: 800px) {
+  html .page > #quartz-body {
+    padding: 0 20px;
+  }
+  html .page > #quartz-body > .sidebar.left {
+    flex-wrap: wrap;
+    row-gap: 12px;
+    column-gap: 10px;
+    padding-top: 24px;
+  }
+  html .sidebar.left > .flex-component {
+    flex: 1 1 155px;
+    min-width: 0;
+  }
+  html .sidebar.left > .spacer {
+    display: none;
+  }
+  html .sidebar .page-title {
+    font-size: 25px;
+  }
+  html .article-title {
+    font-size: 32px;
+    margin-top: 20px;
+  }
+  html article {
+    font-size: 15px;
+  }
+  body[data-slug="index"] .center > article > div:first-child {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px !important;
+  }
+  body[data-slug="index"] .center > article > div:first-child img {
+    width: 136px;
+    margin: 8px 0 15px;
+  }
+  body[data-slug="index"] .center > article > div:first-child > div:last-child {
+    text-align: left !important;
+  }
+  html article h2 {
+    font-size: 24px;
+  }
+  html article h3 {
+    font-size: 18px;
+  }
+  html article li {
+    margin-bottom: 0.8rem;
+  }
+  body[data-slug="index"] .center > article > div:first-child ul {
+    font-size: 13px;
+  }
+  html .page > #quartz-body > .sidebar.right {
+    background: none;
+  }
+  html .search-container {
+    max-width: 100vw;
+  }
+  html .search-space {
+    max-width: calc(100vw - 32px);
+  }
+}
+@media (max-width: 360px) {
+  html .page > #quartz-body {
+    padding: 0 16px;
+  }
+  html .sidebar.left > .flex-component {
+    flex-basis: 100%;
+  }
+  html .sidebar.left > .page-title {
+    flex-basis: 100%;
+  }
+  html .article-title {
+    font-size: 30px;
   }
 }

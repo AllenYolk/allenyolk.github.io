@@ -29,24 +29,24 @@ const config: QuartzConfig = {
       },
       colors: {
         lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#1B365D",   // Kami ink-blue
-          tertiary: "#2D5A8A",    // brand-light hover
-          highlight: "rgba(143, 159, 169, 0.15)",
+          light: "#faf9f7",
+          lightgray: "#dfdfda",
+          gray: "#93958f",
+          darkgray: "#484d50",
+          dark: "#282d32",
+          secondary: "#1B365D", // Kami ink-blue
+          tertiary: "#2D5A8A", // brand-light hover
+          highlight: "#e7edf2",
           textHighlight: "#fff23688",
         },
         darkMode: {
           light: "#161618",
           lightgray: "#393639",
-          gray: "#646464",
+          gray: "#969ba1",
           darkgray: "#d4d4d4",
           dark: "#ebebec",
-          secondary: "#5A8AB5",   // lighter ink-blue for dark bg
-          tertiary: "#7BAFD5",    // lighter hover
+          secondary: "#8ab3d5", // lighter ink-blue for dark bg
+          tertiary: "#a2c5e0", // lighter hover
           highlight: "rgba(143, 159, 169, 0.15)",
           textHighlight: "#b3aa0288",
         },
