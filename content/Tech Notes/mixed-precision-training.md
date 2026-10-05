@@ -64,14 +64,6 @@ flowchart TD
     master --> update
     update --> master2
 
-    style master fill:#dbeafe,stroke:#3b82f6
-    style master2 fill:#dbeafe,stroke:#3b82f6
-    style update fill:#dbeafe,stroke:#3b82f6
-    style gw32 fill:#dbeafe,stroke:#3b82f6
-    style w fill:#fed7aa,stroke:#ea580c
-    style x fill:#fed7aa,stroke:#ea580c
-    style y fill:#fed7aa,stroke:#ea580c
-    style loss fill:#fed7aa,stroke:#ea580c
-    style scaled fill:#fed7aa,stroke:#ea580c
-    style gw fill:#fed7aa,stroke:#ea580c
+    class master,master2,update,gw32 fp32
+    class w,x,y,loss,scaled,gw fp16
 ```

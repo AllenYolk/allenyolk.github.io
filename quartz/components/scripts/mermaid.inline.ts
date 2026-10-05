@@ -163,25 +163,28 @@ class DiagramPanZoom {
     const width = rect.width / this.scale
     const height = rect.height / this.scale
 
-    this.scale = 1
+    // Fit the complete diagram while leaving room for the viewer controls.
+    this.scale = Math.min(
+      1,
+      (this.container.clientWidth - 32) / width,
+      (this.container.clientHeight - 96) / height,
+    )
     this.currentPan = {
-      x: (this.container.clientWidth - width) / 2,
-      y: (this.container.clientHeight - height) / 2,
+      x: (this.container.clientWidth - width * this.scale) / 2,
+      y: (this.container.clientHeight - 64 - height * this.scale) / 2,
     }
     this.updateTransform()
   }
 }
 
 const cssVars = [
-  "--secondary",
-  "--tertiary",
-  "--gray",
   "--light",
-  "--lightgray",
-  "--highlight",
-  "--dark",
   "--darkgray",
-  "--codeFont",
+  "--bodyFont",
+  "--diagram-node",
+  "--diagram-border",
+  "--diagram-line",
+  "--diagram-label",
 ] as const
 
 let mermaidImport = undefined
@@ -213,7 +216,7 @@ document.addEventListener("nav", async () => {
 
     const computedStyleMap = cssVars.reduce(
       (acc, key) => {
-        acc[key] = window.getComputedStyle(document.documentElement).getPropertyValue(key)
+        acc[key] = window.getComputedStyle(document.documentElement).getPropertyValue(key).trim()
         return acc
       },
       {} as Record<(typeof cssVars)[number], string>,
@@ -223,17 +226,32 @@ document.addEventListener("nav", async () => {
     mermaid.initialize({
       startOnLoad: false,
       securityLevel: "loose",
-      theme: darkMode ? "dark" : "base",
+      theme: "base",
+      flowchart: { nodeSpacing: 28, rankSpacing: 34, padding: 14, curve: "basis" },
+      themeCSS: `
+        .node rect { rx: 4px; ry: 4px; stroke-width: 1px; }
+        .edgeLabel { font-size: 12px; }
+        .flowchart-link { stroke-width: 1.15px; }
+        .node.fp32 rect { fill: var(--diagram-fp32-fill); stroke: var(--diagram-fp32-border); }
+        .node.fp32 .label, .node.fp32 .nodeLabel { color: var(--diagram-fp32-text); fill: var(--diagram-fp32-text); }
+        .node.fp16 rect { fill: var(--diagram-fp16-fill); stroke: var(--diagram-fp16-border); }
+        .node.fp16 .label, .node.fp16 .nodeLabel { color: var(--diagram-fp16-text); fill: var(--diagram-fp16-text); }
+      `,
       themeVariables: {
-        fontFamily: computedStyleMap["--codeFont"],
-        primaryColor: computedStyleMap["--light"],
+        darkMode,
+        fontFamily: computedStyleMap["--bodyFont"],
+        fontSize: "14px",
+        background: computedStyleMap["--light"],
+        primaryColor: computedStyleMap["--diagram-node"],
         primaryTextColor: computedStyleMap["--darkgray"],
-        primaryBorderColor: computedStyleMap["--tertiary"],
-        lineColor: computedStyleMap["--darkgray"],
-        secondaryColor: computedStyleMap["--secondary"],
-        tertiaryColor: computedStyleMap["--tertiary"],
-        clusterBkg: computedStyleMap["--light"],
-        edgeLabelBackground: computedStyleMap["--highlight"],
+        primaryBorderColor: computedStyleMap["--diagram-border"],
+        lineColor: computedStyleMap["--diagram-line"],
+        secondaryColor: computedStyleMap["--diagram-node"],
+        tertiaryColor: computedStyleMap["--diagram-node"],
+        clusterBkg: computedStyleMap["--diagram-node"],
+        clusterBorder: computedStyleMap["--diagram-border"],
+        edgeLabelBackground: computedStyleMap["--light"],
+        textColor: computedStyleMap["--diagram-label"],
       },
     })
 

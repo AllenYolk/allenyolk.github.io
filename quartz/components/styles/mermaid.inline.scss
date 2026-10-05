@@ -130,3 +130,55 @@ pre {
     }
   }
 }
+
+// Diagram presentation follows the page theme, including explicit precision colors.
+:root {
+  --diagram-node: #f2f4f5;
+  --diagram-border: #ccd4da;
+  --diagram-line: #738392;
+  --diagram-label: #566570;
+  --diagram-fp32-fill: #eaf0f5;
+  --diagram-fp32-border: #a9becf;
+  --diagram-fp32-text: #34546f;
+  --diagram-fp16-fill: #f3eee7;
+  --diagram-fp16-border: #c9bbaa;
+  --diagram-fp16-text: #665446;
+}
+:root[saved-theme="dark"] {
+  --diagram-node: #202328;
+  --diagram-border: #4a5661;
+  --diagram-line: #8b9ca9;
+  --diagram-label: #b9c2ca;
+  --diagram-fp32-fill: #22303b;
+  --diagram-fp32-border: #4d6a80;
+  --diagram-fp32-text: #a8c9e2;
+  --diagram-fp16-fill: #302b25;
+  --diagram-fp16-border: #75624d;
+  --diagram-fp16-text: #d6c0a5;
+}
+pre:has(> code.mermaid) {
+  padding: 1rem 0.5rem;
+  margin-block: 1.5rem;
+  > code.mermaid {
+    justify-items: center;
+    padding: 0;
+  }
+  > .expand-button {
+    top: 0;
+  }
+}
+@media (hover: none) {
+  pre:has(> code.mermaid) > .expand-button {
+    opacity: 1;
+  }
+}
+@media (max-width: 800px) {
+  #mermaid-container > #mermaid-space {
+    width: calc(100vw - 24px);
+    height: calc(100dvh - 32px);
+  }
+}
+
+#mermaid-container > #mermaid-space > .mermaid-content {
+  transition: none;
+}
