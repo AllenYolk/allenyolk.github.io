@@ -34,7 +34,7 @@ A living document of my tool stack.
 - Python: basedpyright and Ruff
 - Markdown: marksman and render-markdown
 - LaTeX: VimTeX + texlab; Tectonic builds on save
-- blink.cmp completion; Minuet ghost text with MiniMax
+- blink.cmp completion
 - SSH + tmux remote editing, with OSC52 clipboard
 - WakaTime activity tracking
 
@@ -62,16 +62,27 @@ A living document of my tool stack.
 - I use it heavily and highly recommend it
 - Persistent sessions for remote work
 
-**[Zsh](https://www.zsh.org/) + [Oh My Zsh](https://ohmyz.sh/)**
+**[Zsh](https://www.zsh.org/) + [Starship](https://starship.rs/)**
 
-- Customizable shell with plugins and themes
+- Native Zsh configuration with a Starship prompt
+- Standalone autosuggestions and syntax highlighting
 - Sync dotfiles through GitHub
 
 ## AI
 
+**[OpenBot](https://openbot.run/)**
+
+- Persistent local agents with dedicated roles and workspaces
+- Task handoffs between agents
+
+**[T3 Code](https://t3.codes/)**
+
+- Desktop interface for coding agents
+- MCP access from OpenBot for project work
+
 **[Codex](https://openai.com/codex/)**
 
-- My main coding tool: desktop first, CLI as a complement
+- Coding agent used through OpenBot, T3 Code, and the CLI
 - Refactoring, code review, and documentation
 - [Remote](https://learn.chatgpt.com/docs/remote) through the ChatGPT mobile app to my connected Mac
 - No Tailscale needed for Codex Remote; the Mac must stay awake and online
@@ -83,8 +94,8 @@ A living document of my tool stack.
 - Transparent internals and customizable plugins
 - I build plugins and contribute to the community
 - gotgenes' subagent plugin for delegated tasks
-- [pi-minimal-display](https://github.com/AllenYolk/pi-minimal-display): compact tool output
-- [pi-delete](https://github.com/AllenYolk/pi-delete): delete a session on exit
+- [@allenyolk/pi-minimal-display](https://github.com/AllenYolk/pi-extensions/tree/main/packages/pi-minimal-display): compact tool output with expandable details
+- [@allenyolk/pi-delete](https://github.com/AllenYolk/pi-extensions/tree/main/packages/pi-delete): session and subtree deletion
 
 **Providers**
 
@@ -106,15 +117,17 @@ A living document of my tool stack.
 ```mermaid
 flowchart TB
     phone["iPhone"] --> remote["ChatGPT / Codex Remote"]
-    remote -->|"No Tailscale required"| codex["Codex desktop on Mac Mini"]
+    remote -->|"No Tailscale required"| codex["Codex on Mac Mini"]
     macbook["Macbook"] -->|"Tailscale + SSH"| terminal["herdr on Mac Mini"]
     phone -->|"Termius + Tailscale + SSH"| terminal
     terminal --> pi["Pi"]
     terminal --> nvim["Neovim"]
     terminal --> cli["Codex CLI"]
+    openbot["OpenBot agents"] --> cli
+    openbot -->|"MCP"| t3["T3 Code"]
+    t3 --> cli
     codex --> openai["ChatGPT / OpenAI"]
     cli --> openai
     codex -.->|"Rarely used"| minimax["MiniMax M-plan"]
     pi --> minimax
-    nvim -->|"Minuet"| minimax
 ```

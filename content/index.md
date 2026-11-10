@@ -26,11 +26,13 @@ I'm currently a PhD student at [School of Computer Science, Peking University](h
 
 </div>
 
+For the tools I use for development and research, see my [tool stack](tool-stack.md).
+
 ## Publications
 
 ### First-author Papers
 
-* **Yifan Huang**, Wei Fang, Zecheng Hao, Zhengyu Ma, Yonghong Tian, [Towards Lossless Memory-efficient Training of Spiking Neural Networks via Gradient Checkpointing and Spike Compression](https://openreview.net/forum?id=nrBJ0Uvj7c), **ICLR 2026** #snn #ai-infra
+* **Yifan Huang**, Wei Fang, Zecheng Hao, Zhengyu Ma, Yonghong Tian, [Towards Lossless Memory-efficient Training of Spiking Neural Networks via Gradient Checkpointing and Spike Compression](https://openreview.net/forum?id=nrBJ0Uvj7c), **ICLR 2026** ([code](https://github.com/AllenYolk/snn-gradient-checkpointing)) #snn #ai-infra
 
 ### Preprints
 
@@ -46,6 +48,7 @@ I'm currently a PhD student at [School of Computer Science, Peking University](h
 ## Projects
 
 * [SpikingJelly](https://github.com/fangwei123456/spikingjelly): an open-source deep learning framework for Spiking Neural Network (SNN) based on PyTorch. I am the main contributor and maintainer of SpikingJelly after 2024.07. #snn
+* [pi-extensions](https://github.com/AllenYolk/pi-extensions): two independently published npm packages for Pi: `@allenyolk/pi-minimal-display` for compact tool output with expandable details, and `@allenyolk/pi-delete` for session and subtree deletion.
 * [depression-detection](https://github.com/AllenYolk/depression-detection): the final coursework for PKU's *AI in Mental Health*. #ai4psyc
 * [tex-stripper](https://github.com/AllenYolk/tex-stripper): a simple tool to strip LaTeX commands from the document, so that the document can be checked by Grammarly.
 * [metropolis-pku](https://github.com/AllenYolk/metropolis-pku): a delicate beamer theme for Peking University, modified from [Metropolis](https://github.com/matze/mtheme).
