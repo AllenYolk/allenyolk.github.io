@@ -44,6 +44,11 @@ A living document of my tool stack.
 - Tech notes, research notes, and personal documentation
 - Publish notes to [my personal website](https://allenyolk.github.io/) through **[Quartz](https://quartz.jzhao.xyz/)**
 
+**[Oleafly](https://oleafly.com/)**
+
+- Local LaTeX editor and PDF previewer, currently evaluating alongside Neovim + VimTeX
+- Keeping standalone Tectonic alongside it for now
+
 **[tectonic](https://tectonic-typesetting.github.io/)**
 
 - Self-contained LaTeX engine
@@ -73,12 +78,12 @@ A living document of my tool stack.
 **[OpenBot](https://openbot.run/)**
 
 - Persistent local agents with dedicated roles and workspaces
-- Task handoffs between agents
+- Task routing and handoffs between agents, delegating coding work to T3 Code via MCP
 
 **[T3 Code](https://t3.codes/)**
 
-- Desktop interface for coding agents
-- MCP access from OpenBot for project work
+- Primary desktop interface for daily coding tasks and reviewing diffs
+- Connects Codex, Antigravity, and Pi in one workspace, with MCP access from OpenBot
 
 **[Codex](https://openai.com/codex/)**
 
@@ -88,18 +93,25 @@ A living document of my tool stack.
 - No Tailscale needed for Codex Remote; the Mac must stay awake and online
 - MiniMax is also configured, but rarely used here
 
+**[Antigravity](https://antigravity.google/)**
+
+- Gemini-backed agent runtime enabled in OpenBot and T3 Code
+- Local `agy` CLI installed alongside it
+
 **[Pi](https://pi.dev/)**
 
-- My CLI entry point for non-GPT models
+- My CLI entry point for non-GPT models, also connected to T3 Code
 - Transparent internals and customizable plugins
 - I build plugins and contribute to the community
 - gotgenes' subagent plugin for delegated tasks
 - [@allenyolk/pi-minimal-display](https://github.com/AllenYolk/pi-extensions/tree/main/packages/pi-minimal-display): compact tool output with expandable details
 - [@allenyolk/pi-delete](https://github.com/AllenYolk/pi-extensions/tree/main/packages/pi-delete): session and subtree deletion
+- [@allenyolk/pi-compaction](https://github.com/AllenYolk/pi-extensions/tree/main/packages/pi-compaction): custom compaction model and thinking level, with whole-summary persistence
 
 **Providers**
 
 - ChatGPT (OpenAI)
+- Google / Gemini (via Antigravity)
 - MiniMax M-plan
 
 ## Network
@@ -124,10 +136,14 @@ flowchart TB
     terminal --> nvim["Neovim"]
     terminal --> cli["Codex CLI"]
     openbot["OpenBot agents"] --> cli
+    openbot --> agy["Antigravity"]
     openbot -->|"MCP"| t3["T3 Code"]
     t3 --> cli
+    t3 --> agy
+    t3 --> pi
     codex --> openai["ChatGPT / OpenAI"]
     cli --> openai
+    agy --> gemini["Google / Gemini"]
     codex -.->|"Rarely used"| minimax["MiniMax M-plan"]
     pi --> minimax
 ```
